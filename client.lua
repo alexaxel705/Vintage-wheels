@@ -76,15 +76,144 @@ local CustomModels = {
 	[473] = false,
 	[474] = {"wheels/wheel_classic64.png", 0.7}, 
 	[475] = {"wheels/wheel_classic64.png", 0.7}, 
-	
-	
-	
-	
-	[467] = {"wheels/wheel_classic64.png", 0.7}, 
-	
-	[666] = {"wheels/wheel_truck64.png", 0.9}, 
-}
+	[476] = false,
+	[477] = {"wheels/whee_rim64.png", 0.8}, 
+	[478] = {"wheels/wheel_classic64.png", 0.7}, 
+	[479] = {"wheels/wheel_saloon64.png", 0.7}, 
+	[480] = {"wheels/wheel_sport64.png", 0.7}, 
+	[481] = false,
+	[482] = {"wheels/wheel_lightvan64.png", 0.7}, 
+	[483] = {"wheels/wheel_classic64.png", 0.6}, 
+	[484] = false,
+	[485] = {"wheels/wheel_lightvan64.png", 0.6}, 
+	[486] = {"wheels/wheel_truck64.png", 1.6}, 
+	[487] = false,
+	[488] = false,
+	[489] = {"wheels/wheel_offroad64.png", 0.9}, 
+	[490] = {"wheels/wheel_offroad64.png", 0.9}, 
+	[491] = {"wheels/wheel_smallcar64.png", 0.7},
+	[492] = {"wheels/wheel_saloon64.png", 0.7},
+	[493] = false, 
+	[494] = {"wheels/wheel_alloy64.png", 0.8},
+	[495] = {"wheels/wheel_offroad64.png", 1},
+	[496] = {"wheels/wheel_sport64.png", 0.7},
+	[497] = false,
+	[498] = {"wheels/wheel_lightvan64.png", 0.8},
+	[499] = {"wheels/wheel_lightvan64.png", 0.8},
+	[500] = {"wheels/wheel_alloy64.png", 0.8},
+	[501] = false,
+	[502] = {"wheels/wheel_alloy64.png", 0.8},
+	[503] = {"wheels/wheel_alloy64.png", 0.8},
+	[504] = {"wheels/wheel_classic64.png", 0.7},
+	[505] = {"wheels/wheel_offroad64.png", 0.9}, 
+	[506] = {"wheels/wheel_saloon64.png", 0.7},
+	[507] = {"wheels/wheel_sport64.png", 0.7},
+	[508] = {"wheels/wheel_sport64.png", 0.7},
+	[509] = false,
+	[510] = false,
+	[511] = {"wheels/wheel_classic64.png", 0.5}, 
+	[512] = {"wheels/wheel_classic64.png", 0.5}, 
+	[513] = {"wheels/wheel_classic64.png", 0.5}, 
+	[514] = {"wheels/wheel_truck64.png", 1.2}, 
+	[515] = {"wheels/wheel_truck64.png", 1.2}, 
+	[516] = {"wheels/wheel_sport64.png", 0.7},
+	[517] = {"wheels/wheel_sport64.png", 0.8},
+	[518] = {"wheels/wheel_lightvan64.png", 0.7},
+	[519] = {"wheels/wheel_classic64.png", 0.5},
+	[520] = {"wheels/wheel_classic64.png", 0.5},
+	[521] = false,
+	[522] = false,
+	[523] = false,
+	[524] = {"wheels/wheel_truck64.png", 1}, 
+	[525] = {"wheels/wheel_lightvan64.png", 1}, 
+	[526] = {"wheels/wheel_sport64.png", 0.7}, 
+	[527] = {"wheels/wheel_smallcar64.png", 0.7},
+	[528] = {"wheels/wheel_truck64.png", 0.9},
+	[529] = {"wheels/wheel_sport64.png", 0.7}, 
+	[530] = {"wheels/whee_rim64.png", 0.4}, 
+	[531] = false,
+	[532] = false,
+	[533] = {"wheels/wheel_sport64.png", 0.7}, 
+	[534] = {"wheels/wheel_classic64.png", 0.7}, 
+	[535] = {"wheels/wheel_classic64.png", 0.8}, 
+	[536] = {"wheels/wheel_classic64.png", 0.7}, 
+	[537] = false,
+	[538] = false,
+	[539] = false,
+	[540] = {"wheels/wheel_saloon64.png", 0.7}, 
+	[541] = {"wheels/whee_rim64.png", 0.7}, 
+	[542] = {"wheels/wheel_lightvan64.png", 0.7}, 
+	[543] = {"wheels/wheel_classic64.png", 0.7}, 
+	[544] = {"wheels/wheel_truck64.png", 1},
+	[545] = {"wheels/wheel_classic64.png", 0.7}, 
+	[546] = {"wheels/wheel_sport64.png", 0.7}, 
+	[547] = false,
+	[548] = {"wheels/wheel_classic64.png", 0.5}, 
+	[549] = {"wheels/wheel_lightvan64.png", 0.7}, 
+	[550] = {"wheels/wheel_sport64.png", 0.7}, 
+	[551] = {"wheels/wheel_sport64.png", 0.7}, 
+	[552] = {"wheels/wheel_lightvan64.png", 0.9}, 
+	[553] = {"wheels/wheel_classic64.png", 0.5}, 
+	[554] = {"wheels/wheel_lightvan64.png", 0.9}, 
+	[555] = {"wheels/wheel_classic64.png", 0.7}, 
+	[556] = {"wheels/wheel_offroad64.png", 1.6}, 
+	[557] = {"wheels/wheel_offroad64.png", 1.6}, 
+	[558] = {"wheels/wheel_saloon64.png", 0.7}, 
+	[559] = {"wheels/wheel_alloy64.png", 0.7}, 
+	[560] = {"wheels/whee_rim64.png", 0.7}, 
+	[561] = {"wheels/wheel_saloon64.png", 0.7}, 
+	[562] = {"wheels/wheel_sport64.png", 0.7}, 
+	[563] = {"wheels/wheel_classic64.png", 0.5}, 
+	[564] = false,
+	[565] = false,
+	[566] = {"wheels/wheel_smallcar64.png", 0.7}, 
+	[567] = {"wheels/wheel_classic64.png", 0.7}, 
+	[568] = false,
+	[569] = false,
+	[570] = false,
+	[571] = false, 
+	[572] = false,
+	[573] = {"wheels/wheel_offroad64.png", 1.2}, 
+	[574] = {"wheels/wheel_classic64.png", 0.5}, 
+	[575] = {"wheels/wheel_classic64.png", 0.7}, 
+	[576] = {"wheels/wheel_classic64.png", 0.7}, 
+	[577] = false,
+	[578] = {"wheels/wheel_truck64.png", 1}, 
+	[579] = {"wheels/wheel_offroad64.png", 0.9}, 
+	[580] = {"wheels/wheel_classic64.png", 0.8}, 
+	[581] = false, 
+	[582] = {"wheels/wheel_lightvan64.png", 0.8}, 
+	[583] = false,
+	[584] = {"wheels/wheel_truck64.png", 1.2}, 
+	[585] = {"wheels/wheel_sport64.png", 0.7}, 
+	[586] = false,
+	[587] = {"wheels/wheel_alloy64.png", 0.7}, 
+	[588] = {"wheels/wheel_lightvan64.png", 0.9}, 
+	[589] = {"wheels/wheel_alloy64.png", 0.7}, 
+	[590] = false,
+	[591] = {"wheels/wheel_truck64.png", 1.2}, 
+	[592] = {"wheels/wheel_classic64.png", 0.7}, 
+	[593] = {"wheels/wheel_classic64.png", 0.5}, 
+	[594] = false, 
+	[595] = {"wheels/wheel_sport64.png", 0.7}, 
+	[596] = {"wheels/wheel_sport64.png", 0.7}, 
+	[597] = {"wheels/wheel_sport64.png", 0.7}, 
+	[598] = {"wheels/wheel_classic64.png", 0.7}, 
+	[599] = {"wheels/wheel_offroad64.png", 1}, 
+	[600] = {"wheels/wheel_lightvan64.png", 0.7}, 
+	[601] = {"wheels/wheel_truck64.png", 1.3}, 
+	[602] = {"wheels/wheel_sport64.png", 0.7}, 
+	[603] = {"wheels/wheel_sport64.png", 0.7}, 
+	[604] = {"wheels/wheel_classic64.png", 0.7}, 
+	[605] = {"wheels/wheel_classic64.png", 0.7}, 
+	[606] = {"wheels/wheel_lightvan64.png", 0.7}, 
+	[607] = {"wheels/wheel_lightvan64.png", 0.6}, 
+	[608] = {"wheels/wheel_lightvan64.png", 0.5}, 
+	[609] = {"wheels/wheel_lightvan64.png", 0.9}, 
+	[610] = {"wheels/wheel_lightvan64.png", 0.3}, 
+	[611] = {"wheels/wheel_lightvan64.png", 0.7}, 
 
+}
 
 
 function VehStreamIn()
@@ -140,8 +269,8 @@ dxSetShaderValue(tyretread_64H, "gTexture", typetexture)
 
 function removeVehicleCustomWheel(theVehicle)
 	for _, wheel in pairs(createdCustomWheels[theVehicle] or {}) do
-		setVehicleComponentVisible(theVehicle, wheel.name, true)
-		destroyElement(wheel.object)
+		setVehicleComponentVisible(theVehicle, wheel["name"], true)
+		destroyElement(wheel["object"])
 	end
 	createdCustomWheels[theVehicle] = nil
 end
@@ -159,16 +288,16 @@ function addVehicleCustomWheel(theVehicle, model, wscale)
 		setVehicleComponentVisible(theVehicle, wheels[i], false)
 
 		local wheel = {
-			name = wheels[i],
-			object = createObject(1327, Vector3(), Vector3(), true),
+			["name"] = wheels[i],
+			["object"] = createObject(1327, Vector3(), Vector3(), true),
 		}
 	
-		engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel.object)
-		engineApplyShaderToWorldTexture(WheelsTexture[model], "junk_tyre", wheel.object)
+		engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel["object"])
+		engineApplyShaderToWorldTexture(WheelsTexture[model], "junk_tyre", wheel["object"])
 	
-		setElementParent(wheel.object, theVehicle)
-		setElementCollisionsEnabled(wheel.object, false)
-		setObjectScale(wheel.object, tonumber(wscale)/2 or 0.7)
+		setElementParent(wheel["object"], theVehicle)
+		setElementCollisionsEnabled(wheel["object"], false)
+		setObjectScale(wheel["object"], tonumber(wscale)/2 or 0.7)
 		wheels[i] = wheel
 	end
 
@@ -185,17 +314,17 @@ function calculateVehicleWheelRotation(theVehicle, wheel)
 		return
 	end
 
-	if(wheel.object) then
-		local rotation = Vector3(getVehicleComponentRotation(theVehicle, wheel.name, 'world'))
-		local position = Vector3(getVehicleComponentPosition(theVehicle, wheel.name, 'world'))
+	if(wheel["object"]) then
+		local rotation = Vector3(getVehicleComponentRotation(theVehicle, wheel["name"], 'world'))
+		local position = Vector3(getVehicleComponentPosition(theVehicle, wheel["name"], 'world'))
 		
-		local radis = getElementRadius(wheel.object)
+		local radius = getElementRadius(wheel["object"])
 		
-		setElementPosition(wheel.object, position)
+		setElementPosition(wheel["object"], position)
 		
-		local x,y,z = getPositionFromElementOffset(wheel.object, 1.16-radis,0,0)
-		setElementPosition(wheel.object, x,y,z)
-		setElementRotation(wheel.object, rotation, "ZYX")
+		local x,y,z = getPositionFromElementOffset(wheel["object"], 1.14-radius,0,0)
+		setElementPosition(wheel["object"], x,y,z)
+		setElementRotation(wheel["object"], rotation, "ZYX")
 	end
 end
 
