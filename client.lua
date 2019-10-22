@@ -268,11 +268,13 @@ dxSetShaderValue(tyretread_64H, "gTexture", typetexture)
 
 
 function removeVehicleCustomWheel(theVehicle)
-	for _, wheel in pairs(createdCustomWheels[theVehicle] or {}) do
-		setVehicleComponentVisible(theVehicle, wheel["name"], true)
-		destroyElement(wheel["object"])
+	if(createdCustomWheels[theVehicle]) then
+		for _, wheel in pairs(createdCustomWheels[theVehicle]) do
+			setVehicleComponentVisible(theVehicle, wheel["name"], true)
+			destroyElement(wheel["object"])
+		end
+		createdCustomWheels[theVehicle] = nil
 	end
-	createdCustomWheels[theVehicle] = nil
 end
 
 
@@ -307,24 +309,29 @@ end
 
 
 function calculateVehicleWheelRotation(theVehicle, wheel)
-	if(type(wheel) == 'table') and (#wheel > 0) then
-		for i = 1, #wheel do
-			calculateVehicleWheelRotation(theVehicle, wheel[i])
+	if(isElement(theVehicle)) then
+		if(getVehicleUpgradeOnSlot(theVehicle, 12) == 0) then
+			if(wheel["object"]) then
+				local rotation = Vector3(getVehicleComponentRotation(theVehicle, wheel["name"], 'world'))
+				local position = Vector3(getVehicleComponentPosition(theVehicle, wheel["name"], 'world'))
+				
+				local radius = getElementRadius(wheel["object"])
+				
+				setElementPosition(wheel["object"], position)
+				
+				local x,y,z = getPositionFromElementOffset(wheel["object"], 1.16-radius,0,0)
+				setElementPosition(wheel["object"], x,y,z)
+				setElementRotation(wheel["object"], rotation, "ZYX")
+				local d, i = getElementDimension(theVehicle), getElementInterior(theVehicle)
+				setElementDimension(wheel["object"], d)
+				setElementInterior(wheel["object"], i)
+			end
+		else
+			setVehicleComponentVisible(theVehicle, wheel["name"], true)
+			setElementPosition(wheel["object"], Vector3())
 		end
-		return
-	end
-
-	if(wheel["object"]) then
-		local rotation = Vector3(getVehicleComponentRotation(theVehicle, wheel["name"], 'world'))
-		local position = Vector3(getVehicleComponentPosition(theVehicle, wheel["name"], 'world'))
-		
-		local radius = getElementRadius(wheel["object"])
-		
-		setElementPosition(wheel["object"], position)
-		
-		local x,y,z = getPositionFromElementOffset(wheel["object"], 1.14-radius,0,0)
-		setElementPosition(wheel["object"], x,y,z)
-		setElementRotation(wheel["object"], rotation, "ZYX")
+	else
+		removeVehicleCustomWheel(theVehicle)
 	end
 end
 
@@ -342,14 +349,14 @@ end
 
 
 
-addEventHandler('onClientPreRender', root,
-	function()
-		for theVehicle, wheels in pairs(createdCustomWheels) do
-			calculateVehicleWheelRotation(theVehicle, wheels)
+function RenderWheels()
+	for theVehicle, wheels in pairs(createdCustomWheels) do
+		for i = 1, #wheels do
+			calculateVehicleWheelRotation(theVehicle, wheels[i])
 		end
 	end
-)
-
+end
+addEventHandler('onClientPreRender', root, RenderWheels)
 
 
 
