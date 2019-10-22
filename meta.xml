@@ -1,0 +1,18 @@
+<meta>
+	<info name="Wheels System" version="1.0.0" type="script" author="alexaxel705" description="Wheels SystemSystem"/>
+	<script src="client.lua" type="client"/>
+	
+	<file src="shader.fx" download="true" />
+	
+	<file src="wheels/wheel_truck64.png" type="client" />
+	<file src="wheels/wheel_sport64.png" type="client" />
+	<file src="wheels/wheel_smallcar64.png" type="client" />
+	<file src="wheels/wheel_saloon64.png" type="client" />
+	<file src="wheels/wheel_offroad64.png" type="client" />
+	<file src="wheels/wheel_lightvan64.png" type="client" />
+	<file src="wheels/wheel_lighttruck64.png" type="client" />
+	<file src="wheels/wheel_classic64.png" type="client" />
+	<file src="wheels/wheel_alloy64.png" type="client" />
+	<file src="wheels/whee_rim64.png" type="client" />
+	<file src="wheels/tyre64a.png" type="client" />
+</meta>
