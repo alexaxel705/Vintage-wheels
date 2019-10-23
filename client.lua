@@ -212,7 +212,13 @@ local CustomModels = {
 	[609] = {"wheels/wheel_lightvan64.png", 0.9}, 
 	[610] = {"wheels/wheel_lightvan64.png", 0.3}, 
 	[611] = {"wheels/wheel_lightvan64.png", 0.7}, 
-
+	
+	[612] = {"wheels/wheel_saloon64.png", 0.7}, 
+	[613] = {"wheels/wheel_smallcar64.png", 0.7}, 
+	[614] = {"wheels/wheel_truck64.png", 0.9}, 
+	[615] = {"wheels/whee_rim64.png", 0.7},
+	[616] = {"wheels/wheel_truck64.png", 1.2}, 
+	[617] = {"wheels/wheel_lightvan64.png", 0.7}, 
 }
 
 
