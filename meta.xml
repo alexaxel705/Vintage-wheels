@@ -4,6 +4,7 @@
 	
 	<file src="shader.fx" download="true" />
 	
+	<file src="wheels/wheel_old.png" type="client" />
 	<file src="wheels/wheel_truck64.png" type="client" />
 	<file src="wheels/wheel_sport64.png" type="client" />
 	<file src="wheels/wheel_smallcar64.png" type="client" />
