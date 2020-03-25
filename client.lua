@@ -395,12 +395,14 @@ dxSetShaderValue(tyretread_64H, "gTexture", typetexture)
 
 
 function removeVehicleCustomWheel(theVehicle)
-	if(createdCustomWheels[theVehicle]) then
-		for _, wheel in pairs(createdCustomWheels[theVehicle]) do
-			setVehicleComponentVisible(theVehicle, wheel["name"], true)
-			destroyElement(wheel["object"])
+	if isElement(theVehicle) then 
+		if(createdCustomWheels[theVehicle]) then
+			for _, wheel in pairs(createdCustomWheels[theVehicle]) do
+				setVehicleComponentVisible(theVehicle, wheel["name"], true)
+				destroyElement(wheel["object"])
+			end
+			createdCustomWheels[theVehicle] = nil
 		end
-		createdCustomWheels[theVehicle] = nil
 	end
 end
 
@@ -447,7 +449,7 @@ function calculateVehicleWheelRotation(theVehicle, wheel)
 				
 				setElementPosition(wheel["object"], position)
 				
-				local x,y,z = getPositionFromElementOffset(wheel["object"], 1.16-radius,0,0)
+				local x,y,z = getPositionFromElementOffset(wheel["object"], 1.15-radius,0,0)
 				setElementPosition(wheel["object"], x,y,z)
 				setElementRotation(wheel["object"], rotation, "ZYX")
 				local d, i = getElementDimension(theVehicle), getElementInterior(theVehicle)
@@ -486,7 +488,7 @@ function RenderWheels()
 		end
 	end
 end
-addEventHandler('onClientPreRender', root, RenderWheels)
+addEventHandler("onClientPreRender", root, RenderWheels)
 
 
 
@@ -496,7 +498,7 @@ function Start()
 		triggerEvent("onClientElementStreamIn", theVehicle)
 	end
 end
-addEventHandler("onClientResourceStart", getResourceRootElement(), Start)
+addEventHandler("onClientResourceStart", resourceRoot, Start)
 
 
 
@@ -505,5 +507,5 @@ function Stop()
 		removeVehicleCustomWheel(theVehicle)
 	end
 end
-addEventHandler("onClientResourceStop", getResourceRootElement(), Stop)
+addEventHandler("onClientResourceStop", resourceRoot, Stop)
 
