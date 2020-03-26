@@ -342,6 +342,8 @@ local CustomModels = {
 }
 
 
+local createdCustomWheels = {}
+
 function VehStreamIn()
 	if(getElementType(source) == "vehicle") then
 		local model = getElementData(source, "model") or getElementModel(source)
@@ -361,12 +363,11 @@ function VehStreamOut()
 end
 addEvent("onClientElementStreamOut", true)
 addEventHandler("onClientElementStreamOut", getRootElement(), VehStreamOut)
+addEventHandler("onClientElementDestroy", getRootElement(), VehStreamOut)
 
 
 
 
-
-local createdCustomWheels = {}
 
 local WheelsTexture = {
 	["wheels/wheel_old.png"] = dxCreateShader("shader.fx"),
@@ -411,7 +412,6 @@ end
 function addVehicleCustomWheel(theVehicle, model, wscale)
 	removeVehicleCustomWheel(theVehicle)
 	local wheels = {"wheel_lf_dummy", "wheel_rf_dummy", "wheel_lb_dummy", "wheel_rb_dummy", "wheel_lm_dummy", "wheel_rm_dummy"}
-	
 
 	for i = 1, #wheels do
 		local wheel = {
@@ -422,7 +422,6 @@ function addVehicleCustomWheel(theVehicle, model, wscale)
 		engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel["object"])
 		engineApplyShaderToWorldTexture(WheelsTexture[model], "junk_tyre", wheel["object"])
 	
-		setElementParent(wheel["object"], theVehicle)
 		setElementCollisionsEnabled(wheel["object"], false)
 		setObjectScale(wheel["object"], tonumber(wscale)/2 or 0.7)
 		wheels[i] = wheel
@@ -431,41 +430,6 @@ function addVehicleCustomWheel(theVehicle, model, wscale)
 	createdCustomWheels[theVehicle] = wheels
 end
 
-
-
-function calculateVehicleWheelRotation(theVehicle, wheel)
-	if(isElement(theVehicle)) then
-		if(getVehicleUpgradeOnSlot(theVehicle, 12) == 0) then
-			if(wheel["object"]) then
-				setVehicleComponentVisible(theVehicle, "extra_", false) -- for trailer
-				setVehicleComponentVisible(theVehicle, "extra__", false) -- for trailer
-	
-				setVehicleComponentVisible(theVehicle, wheel["name"], false)
-			
-				local rotation = Vector3(getVehicleComponentRotation(theVehicle, wheel["name"], 'world'))
-				local position = Vector3(getVehicleComponentPosition(theVehicle, wheel["name"], 'world'))
-				
-				local radius = getElementRadius(wheel["object"])
-				
-				setElementPosition(wheel["object"], position)
-				
-				local x,y,z = getPositionFromElementOffset(wheel["object"], 1.15-radius,0,0)
-				setElementPosition(wheel["object"], x,y,z)
-				setElementRotation(wheel["object"], rotation, "ZYX")
-				local d, i = getElementDimension(theVehicle), getElementInterior(theVehicle)
-				setElementDimension(wheel["object"], d)
-				setElementInterior(wheel["object"], i)
-			end
-		else
-			setVehicleComponentVisible(theVehicle, "extra_", true) -- for trailer
-			setVehicleComponentVisible(theVehicle, "extra__", true) -- for trailer
-			setVehicleComponentVisible(theVehicle, wheel["name"], true)
-			setElementPosition(wheel["object"], Vector3())
-		end
-	else
-		removeVehicleCustomWheel(theVehicle)
-	end
-end
 
 
 function getPositionFromElementOffset(element,offX,offY,offZ) 
@@ -483,8 +447,29 @@ end
 
 function RenderWheels()
 	for theVehicle, wheels in pairs(createdCustomWheels) do
-		for i = 1, #wheels do
-			calculateVehicleWheelRotation(theVehicle, wheels[i])
+		for id = 1, #wheels do
+			if(isElement(theVehicle)) then
+				if(getVehicleUpgradeOnSlot(theVehicle, 12) == 0) then
+					if(wheels[id]["object"]) then
+						setVehicleComponentVisible(theVehicle, "extra_", false) -- for trailer
+						setVehicleComponentVisible(theVehicle, "extra__", false) -- for trailer
+						setVehicleComponentVisible(theVehicle, wheels[id]["name"], false)
+					
+						setElementPosition(wheels[id]["object"], Vector3(getVehicleComponentPosition(theVehicle, wheels[id]["name"], 'world')))
+						setElementPosition(wheels[id]["object"], Vector3(getPositionFromElementOffset(wheels[id]["object"], 1.15-getElementRadius(wheels[id]["object"]),0,0)))
+						setElementRotation(wheels[id]["object"], Vector3(getVehicleComponentRotation(theVehicle, wheels[id]["name"], 'world')), "ZYX")
+						setElementDimension(wheels[id]["object"], getElementDimension(theVehicle))
+						setElementInterior(wheels[id]["object"], getElementInterior(theVehicle))
+					end
+				else
+					setVehicleComponentVisible(theVehicle, "extra_", true) -- for trailer
+					setVehicleComponentVisible(theVehicle, "extra__", true) -- for trailer
+					setVehicleComponentVisible(theVehicle, wheels[id]["name"], true)
+					setElementPosition(wheels[id]["object"], Vector3())
+				end
+			else
+				removeVehicleCustomWheel(theVehicle)
+			end
 		end
 	end
 end
