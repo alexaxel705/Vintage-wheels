@@ -346,10 +346,7 @@ local createdCustomWheels = {}
 
 function VehStreamIn()
 	if(getElementType(source) == "vehicle") then
-		local model = getElementData(source, "model") or getElementModel(source)
-		if(CustomModels[model]) then
-			addVehicleCustomWheel(source, CustomModels[model][1], CustomModels[model][2])
-		end
+		addVehicleCustomWheel(source)
 	end
 end
 addEvent("onClientElementStreamIn", true)
@@ -370,29 +367,28 @@ addEventHandler("onClientElementDestroy", getRootElement(), VehStreamOut)
 
 function VehicleUpgrade(upgrade)
 	if(upgrade >= 1073 or upgrade <= 1085) then
-		local model = getElementModel(source)
-		addVehicleCustomWheel(source, CustomModels[model][1], CustomModels[model][2])
+		addVehicleCustomWheel(source)
 	end
 end
 addEvent("VehicleUpgrade", true)
 addEventHandler("VehicleUpgrade", root, VehicleUpgrade)
 
 
+local LOD = getVehiclesLODDistance()/3
 
 local WheelsTexture = {
-	["wheels/wheel_old.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_truck64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_sport64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_smallcar64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_saloon64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_offroad64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_lightvan64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_lighttruck64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_classic64.png"] = dxCreateShader("shader.fx"),
-	["wheels/wheel_alloy64.png"] = dxCreateShader("shader.fx"),
-	["wheels/whee_rim64.png"] = dxCreateShader("shader.fx"),
+	["wheels/wheel_old.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_truck64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_sport64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_smallcar64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_saloon64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_offroad64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_lightvan64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_lighttruck64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_classic64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/wheel_alloy64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
+	["wheels/whee_rim64.png"] = dxCreateShader("shader.fx", 0, LOD, false, "object"),
 }
-
 
 for name, _ in pairs(WheelsTexture) do
 	dxSetShaderValue(WheelsTexture[name], "gTexture", dxCreateTexture(name))
@@ -408,9 +404,9 @@ dxSetShaderValue(tyretread_64H, "gTexture", typetexture)
 function removeVehicleCustomWheel(theVehicle)
 	if isElement(theVehicle) then 
 		if(createdCustomWheels[theVehicle]) then
-			for _, wheel in pairs(createdCustomWheels[theVehicle]) do
-				setVehicleComponentVisible(theVehicle, wheel["name"], true)
-				destroyElement(wheel["object"])
+			for name, object in pairs(createdCustomWheels[theVehicle]) do
+				setVehicleComponentVisible(theVehicle, name, true)
+				destroyElement(object)
 			end
 			createdCustomWheels[theVehicle] = nil
 		end
@@ -420,42 +416,30 @@ end
 
 
 local wheels = {"wheel_lf_dummy", "wheel_rf_dummy", "wheel_lb_dummy", "wheel_rb_dummy", "wheel_lm_dummy", "wheel_rm_dummy", "extra_", "extra__"}
-function addVehicleCustomWheel(theVehicle, model, wscale)
-	removeVehicleCustomWheel(theVehicle)
-	
-	if(getVehicleUpgradeOnSlot(theVehicle, 12) == 0) then
-		local wheel = {}
-		for i = 1, #wheels do
-			local x, y, z = getVehicleComponentPosition(theVehicle, wheels[i])
-			if(x) then
-				wheel[#wheel+1] = {
-					["name"] = wheels[i],
-					["object"] = createObject(1327, Vector3(), Vector3(), true),
-				}
-			
-				engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel[#wheel]["object"])
-				engineApplyShaderToWorldTexture(WheelsTexture[model], "junk_tyre", wheel[#wheel]["object"])
-			
-				setElementCollisionsEnabled(wheel[#wheel]["object"], false)
-				setObjectScale(wheel[#wheel]["object"], tonumber(wscale)/2 or 0.7)
+function addVehicleCustomWheel(theVehicle)
+	local model = getElementData(theVehicle, "model") or getElementModel(theVehicle)
+	if(CustomModels[model]) then
+		removeVehicleCustomWheel(theVehicle)
+		
+		if(getVehicleUpgradeOnSlot(theVehicle, 12) == 0) then
+			local wheel = {}
+			for _, name in pairs(wheels) do
+				local x, y, z = getVehicleComponentPosition(theVehicle, name)
+				if(x) then
+					wheel[name] = createObject(1327, Vector3(), Vector3(), true)
+					engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel[name])
+					engineApplyShaderToWorldTexture(WheelsTexture[CustomModels[model][1]], "junk_tyre", wheel[name])
 				
-				setVehicleComponentVisible(theVehicle, wheel[#wheel]["name"], false)
+					setElementCollisionsEnabled(wheel[name], false)
+					setObjectScale(wheel[name], CustomModels[model][2]/2)
+					
+					setVehicleComponentVisible(theVehicle, name, false)
+				end
 			end
+			createdCustomWheels[theVehicle] = wheel
 		end
-		createdCustomWheels[theVehicle] = wheel
 	end
 end
-
-
-
-function getPositionFromElementOffset(element,offX,offY,offZ) 
-    local m = getElementMatrix(element)
-    local x = offX * m[1][1] + offY * m[2][1] + offZ * m[3][1] + m[4][1]
-    local y = offX * m[1][2] + offY * m[2][2] + offZ * m[3][2] + m[4][2] 
-    local z = offX * m[1][3] + offY * m[2][3] + offZ * m[3][3] + m[4][3] 
-    return x, y, z
-end 
-
 
 
 
@@ -463,15 +447,15 @@ end
 
 function RenderWheels()
 	for theVehicle, wheels in pairs(createdCustomWheels) do
-		for id = 1, #wheels do
+		for name, object in pairs(wheels) do
 			if(isElement(theVehicle)) then
-				if(wheels[id]["object"]) then
-					setElementPosition(wheels[id]["object"], Vector3(getVehicleComponentPosition(theVehicle, wheels[id]["name"], 'world')))
-					setElementPosition(wheels[id]["object"], Vector3(getPositionFromElementOffset(wheels[id]["object"], 1.15-getElementRadius(wheels[id]["object"]),0,0)))
-					setElementRotation(wheels[id]["object"], Vector3(getVehicleComponentRotation(theVehicle, wheels[id]["name"], 'world')), "ZYX")
-					setElementDimension(wheels[id]["object"], getElementDimension(theVehicle))
-					setElementInterior(wheels[id]["object"], getElementInterior(theVehicle))
-				end
+				local rot = Vector3(getVehicleComponentRotation(theVehicle, name, 'world'))
+				local mat = Matrix(Vector3(getVehicleComponentPosition(theVehicle, name, 'world')), rot):transformPosition(Vector3(1.15-getElementRadius(object), 0, 0))
+				
+				setElementPosition(object, mat)
+				setElementRotation(object, rot, "ZYX")
+				setElementDimension(object, getElementDimension(theVehicle))
+				setElementInterior(object, getElementInterior(theVehicle))
 			else
 				removeVehicleCustomWheel(theVehicle)
 			end
@@ -479,7 +463,6 @@ function RenderWheels()
 	end
 end
 addEventHandler("onClientPreRender", root, RenderWheels)
-
 
 
 
