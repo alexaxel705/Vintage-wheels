@@ -409,25 +409,27 @@ end
 
 
 
+local wheels = {"wheel_lf_dummy", "wheel_rf_dummy", "wheel_lb_dummy", "wheel_rb_dummy", "wheel_lm_dummy", "wheel_rm_dummy"}
 function addVehicleCustomWheel(theVehicle, model, wscale)
 	removeVehicleCustomWheel(theVehicle)
-	local wheels = {"wheel_lf_dummy", "wheel_rf_dummy", "wheel_lb_dummy", "wheel_rb_dummy", "wheel_lm_dummy", "wheel_rm_dummy"}
+	local wheel = {}
 
 	for i = 1, #wheels do
-		local wheel = {
-			["name"] = wheels[i],
-			["object"] = createObject(1327, Vector3(), Vector3(), true),
-		}
-	
-		engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel["object"])
-		engineApplyShaderToWorldTexture(WheelsTexture[model], "junk_tyre", wheel["object"])
-	
-		setElementCollisionsEnabled(wheel["object"], false)
-		setObjectScale(wheel["object"], tonumber(wscale)/2 or 0.7)
-		wheels[i] = wheel
+		local x, y, z = getVehicleComponentPosition(theVehicle, wheels[i])
+		if(x) then
+			wheel[#wheel+1] = {
+				["name"] = wheels[i],
+				["object"] = createObject(1327, Vector3(), Vector3(), true),
+			}
+		
+			engineApplyShaderToWorldTexture(tyretread_64H, "tyretread_64H", wheel[#wheel]["object"])
+			engineApplyShaderToWorldTexture(WheelsTexture[model], "junk_tyre", wheel[#wheel]["object"])
+		
+			setElementCollisionsEnabled(wheel[#wheel]["object"], false)
+			setObjectScale(wheel[#wheel]["object"], tonumber(wscale)/2 or 0.7)
+		end
 	end
-
-	createdCustomWheels[theVehicle] = wheels
+	createdCustomWheels[theVehicle] = wheel
 end
 
 
